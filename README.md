@@ -5,7 +5,9 @@ The instructions for running the sample code are written for Google Cloud Platfo
 
 * Create a Free Tier GCP account - follow instructions at https://cloud.google.com/free
 * Create a VM
-* Install Kafka - instructions at https://tinyurl.com/uastytv
-* Install Python
-* Install Spark
-* Install NodeJS
+
+## Kafka
+* Install Kafka and run CLI commands - instructions at https://tinyurl.com/uastytv
+* NodeJS example as Producer / Consumer - 
+* Install Spark - instructions at https://tinyurl.com/v2vqfwl
+
