@@ -16,3 +16,14 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 * NodeJS example as Producer / Consumer - 
 * Install Spark - instructions at https://tinyurl.com/v2vqfwl
 
+Other:
+
+```
+sudo apt update
+sudo apt install git
+```
+
+```
+
+
+```
