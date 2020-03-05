@@ -4,7 +4,7 @@ var kafka = require('kafka-node');
 var producer = null;
 var readyFlag = false;
 
-exports.produceJob = function (topic, pload, isBatchProducer, callback) {
+produceJob = function (topic, pload, isBatchProducer, callback) {
   getProducer(topic, pload, isBatchProducer);
   function send() {
     producer.send([
