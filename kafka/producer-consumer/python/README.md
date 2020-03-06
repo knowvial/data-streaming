@@ -8,7 +8,7 @@ sudo apt update
 sudo apt install python3-pip
 pip3 --version
 ```
-
+ 
 Install required libraries
 ```
 pip3 install kafka
