@@ -18,6 +18,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 ## Spark Streaming
 * Install Spark - instructions at https://tinyurl.com/v2vqfwl
+* Run Spark Streaming examples - instructions at 
 
 Other:
 
