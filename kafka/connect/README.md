@@ -1,22 +1,19 @@
 # Kafka Connect
 ![Kafka Connect Data Flow](kafka-connect.png)
 
-Confluent maintains the connnectors to various source and sinks. You can view the complete list of sources and sinks at https://www.confluent.io/hub/.
-To use one of the connector, install Confluent Hub Client using the following comamnds.
-```
-curl -sL http://client.hub.confluent.io/confluent-hub-client-latest.tar.gz -o confluent-hub.gz
+Download jar files from https://github.com/jcustenborder/kafka-connect-twitter/releases.
 
-mkdir -p confluent-hub && tar -zxf confluent-hub.gz -C confluent-hub
-echo "export PATH=${PWD}/confluent-hub/bin:\$PATH" >>~/.bashrc
-source ~/.bashrc
 ```
+cd kafka/connect
 
-Install Twiter connector using Confluent Hub Client
-```
-confluent-hub install jcustenborder/kafka-connect-twitter:0.3.33
+curl -sL https://github.com/jcustenborder/kafka-connect-twitter/releases/download/0.2.26/kafka-connect-twitter-0.2.26.tar.gz -o kafka-connect-twitter.tar.gz
+
+tar -zxf kafka-connect-twitter.tar.gz
 ```
 
-Ensure "plugins.path" location in connect-standalone.properties file is pointing to the folder that has all the twitter connector jar files. 
+Confirm all the required jar files are located at usr/share/kafka-connect/kafka-connect-twitter location.
+
+Ensure "plugins.path" location in connect-standalone.properties file is pointing to usr/share/kafka-connect (or equivalent on your machine). 
 
 Enter Twitter developer credentials in twitter.properties file and update your search terms.
 
@@ -35,4 +32,24 @@ Run Connect and check if you can see the twitter results in the consumer CLI win
 ```
 cd kafka/connect
 connect-standalone.sh connect-standalone.properties twitter.properties
+```
+
+
+
+---
+
+Confluent maintains the connnectors to various source and sinks. You can view the complete list of sources and sinks at https://www.confluent.io/hub/.
+To use one of the connector, install Confluent Hub Client using the following comamnds.
+```
+cd ~
+curl -sL http://client.hub.confluent.io/confluent-hub-client-latest.tar.gz -o confluent-hub.gz
+
+mkdir -p confluent-hub && tar -zxf confluent-hub.gz -C confluent-hub
+echo "export PATH=${PWD}/confluent-hub/bin:\$PATH" >>~/.bashrc
+source ~/.bashrc
+```
+
+Install Twiter connector using Confluent Hub Client
+```
+confluent-hub install jcustenborder/kafka-connect-twitter:0.3.33
 ```
