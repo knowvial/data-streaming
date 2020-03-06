@@ -1,4 +1,4 @@
 /kafka/producer-consumer/nodejs/node_modules
 /kafka/producer-consumer/nodejs/config-dev.js
 /kafka/producer-consumer/python/config-dev.cfg
-/kafka/connnect/twitter-dev.properties
+/kafka/connect/twitter-dev.properties
