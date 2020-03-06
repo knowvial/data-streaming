@@ -13,7 +13,7 @@ node -v
 
 Run 
 ```
-cd kafka/nodejs
+cd kafka/consumer-producer/nodejs
 npm install
 
 node consumer.js
