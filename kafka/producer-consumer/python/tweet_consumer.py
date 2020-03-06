@@ -15,6 +15,7 @@ fileHandle = open(tweet_download_file, "a+")
 consumer = KafkaConsumer(bootstrap_servers=kafka_server, group_id='app1', auto_offset_reset='earliest', value_deserializer=lambda m: json.loads(m.decode('utf-8')))
 consumer.subscribe([kafka_topic])
 for message in consumer :
-  fileHandle.write(message)
+  msg = message.value.user.name + "\t" + message.value.created_at + "\t" + message.value.text + "\t" + value.retweet_count
+  fileHandle.write(msg)
 
 fileHandle.close()
