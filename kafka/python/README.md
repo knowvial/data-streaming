@@ -23,3 +23,12 @@ Create a topic called covid
 kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic covid
 ```
 
+```
+cd kafka/python
+```
+Update your Twitter developer app credentials in config.cfg file. Refer to https://themepacific.com/how-to-generate-api-key-consumer-token-access-key-for-twitter-oauth/994/
+
+Run the twitter kafka producer program
+```
+python3 twitter_producer.py
+```
