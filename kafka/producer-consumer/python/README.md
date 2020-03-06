@@ -43,9 +43,10 @@ Check how many tweets are in the topic by partition
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group app1
 ```
 ---
-
-
-
+Run Consumer program to read messages from Kafka and write to file
+```
+python3 tweet_consumer.py
+```
 ---
 
 Now, update tweet_consumer.py to write to HDFS. Hint: https://creativedata.atlassian.net/wiki/spaces/SAP/pages/61177860/Python+-+Read+Write+files+from+HDFS
