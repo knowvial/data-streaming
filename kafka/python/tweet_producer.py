@@ -2,11 +2,10 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from kafka import SimpleProducer, KafkaClient
-from ConfigParser import ConfigParser
+import configparser
 
-configParser = ConfigParser.RawConfigParser()   
-configFilePath = r'./config.cfg'
-configParser.read(configFilePath)
+config = configparser.ConfigParser()
+config.read(r'./config.cfg')
 
 access_token = configParser.get('twitter', 'access_token')
 access_token_secret =  configParser.get('twitter', 'access_token_secret')
