@@ -30,7 +30,6 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic twitter_stat
 
 Run Connect and check if you can see the twitter results in the consumer CLI window.
 ```
-cd kafka/connect
 connect-standalone.sh connect-standalone.properties twitter.properties
 ```
 
