@@ -14,7 +14,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 ## Kafka
 * Install Kafka and run CLI commands - instructions at https://tinyurl.com/uastytv
 * Python sample code for Producer / Consumer - https://github.com/rbotla/data-streaming/tree/master/kafka/producer-consumer/python
-* Python sample code for Kafka Connect - 
+* Python sample code for Kafka Connect - https://github.com/rbotla/data-streaming/tree/master/kafka/connect
 
 ## Spark Streaming
 * Install Spark - instructions at https://tinyurl.com/v2vqfwl
@@ -24,9 +24,4 @@ Other:
 ```
 sudo apt update
 sudo apt install git
-```
-
-```
-
-
 ```
