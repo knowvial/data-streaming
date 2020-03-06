@@ -22,7 +22,7 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print (status)
 
-kafka = KafkaClient(kafka_server)
+kafka = KafkaClient(hosts= kafka_server)
 producer = SimpleProducer(kafka)
 l = StdOutListener()
 auth = OAuthHandler(consumer_key, consumer_secret)
