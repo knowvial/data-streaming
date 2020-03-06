@@ -1,20 +1,14 @@
 from kafka import KafkaConsumer
-from kafka import KafkaProducer
 import json,time
-from xlutils.copy import copy    
-from xlrd import open_workbook
-import pandas
+import configparser
 
-consumer = KafkaConsumer(bootstrap_servers='localhost:9092')
-KafkaConsumer()
-consumer.subscribe("test")
+config = configparser.ConfigParser()
+config.read(r'./config.cfg')
 
-rowx=0
-colx=0
+kafka_server = config.get('kafka', 'server')
+kafka_topic = config.get('kafka', 'topic')
 
-for msg in consumer:
-        book_ro = open_workbook("twitter.xls")
-        book = copy(book_ro)  # creates a writeable copy
-        sheet1 = book.get_sheet(0)  # get a first sheet
-        sheet1.write(rowx,colx, msg[6])
-        book.save("twitter.xls")
+consumer = KafkaConsumer(bootstrap_servers=kafka_server, auto_offset_reset='latest', value_deserializer=lambda m: json.loads(m.decode('utf-8')))
+consumer.subscribe([kafka_topic])
+for message in consumer :
+  print(message)
