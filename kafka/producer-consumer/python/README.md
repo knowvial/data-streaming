@@ -1,5 +1,7 @@
 # Kafka Producer and Consumer in Python
 
+![Kafka Twitter](kafka-consumer-twitter.png)
+
 Instructions to install Python3.x on Debian 9
 ```
 sudo apt update
@@ -7,7 +9,7 @@ sudo apt install python3-pip
 pip3 --version
 ```
 
-Install dependent libraries
+Install required libraries
 ```
 pip3 install kafka
 pip3 install kafka-python
@@ -16,7 +18,7 @@ pip3 install tweepy
 pip3 install configparser
 ```
 
-Create a topic called covid
+Create a Kafka topic called covid
 ```
 kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic covid
 ```
