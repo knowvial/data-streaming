@@ -7,12 +7,12 @@ import configparser
 config = configparser.ConfigParser()
 config.read(r'./config.cfg')
 
-access_token = configParser.get('twitter', 'access_token')
-access_token_secret =  configParser.get('twitter', 'access_token_secret')
-consumer_key =  configParser.get('twitter', 'consumer_key')
-consumer_secret =  configParser.get('twitter', 'consumer_secret')
-kafka_server = configParser.get('kafka', 'server')
-kafka_topic = configParser.get('kafka', 'topic')
+access_token = config.get('twitter', 'access_token')
+access_token_secret =  config.get('twitter', 'access_token_secret')
+consumer_key =  config.get('twitter', 'consumer_key')
+consumer_secret =  config.get('twitter', 'consumer_secret')
+kafka_server = config.get('kafka', 'server')
+kafka_topic = config.get('kafka', 'topic')
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
