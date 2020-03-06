@@ -1,3 +1,4 @@
+```shell
 gcloud compute instances create data-streaming \
     --image-family debian-9 \
     --image-project debian-cloud \
@@ -17,10 +18,11 @@ gcloud compute firewall-rules create allow-for-data-streaming \
     --allow tcp:80-9999
 
 gcloud compute instances describe instance-1 --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
 
--------------
+---
 
-
+```
 gcloud compute firewall-rules update MY-RULE --allow tcp:80,icmp
 
 
@@ -33,3 +35,4 @@ gcloud compute instances delete data-streaming
 gcloud compute instances add-tags instance-1 --zone us-west1-b --tags all-data-streamimg
 
 gcloud compute instances remove-tags instance-1 --all
+```
