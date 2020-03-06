@@ -2,7 +2,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from kafka import SimpleProducer, KafkaClient
-import ConfigParser
+from ConfigParser import ConfigParser
 
 configParser = ConfigParser.RawConfigParser()   
 configFilePath = r'./config.cfg'

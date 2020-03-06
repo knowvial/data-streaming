@@ -10,9 +10,12 @@ pip3 --version
 
 Install dependent libraries
 ```
+pip3 install kafka
 pip3 install kafka-python
 pip3 install python-twitter
 pip3 install tweepy
+pip3 install ConfigParser
+
 ```
 
 Create a topic called covid
