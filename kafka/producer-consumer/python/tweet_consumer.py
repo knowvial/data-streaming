@@ -1,5 +1,6 @@
 from kafka import KafkaConsumer
-import json,time
+import json
+import sys
 import configparser
 
 config = configparser.ConfigParser()
@@ -15,7 +16,12 @@ fileHandle = open(tweet_download_file, "a+")
 consumer = KafkaConsumer(bootstrap_servers=kafka_server, group_id='app1', auto_offset_reset='earliest', value_deserializer=lambda m: json.loads(m.decode('utf-8')))
 consumer.subscribe([kafka_topic])
 for message in consumer :
-  msg = message.value.user.name + "\t" + message.value.created_at + "\t" + message.value.text + "\t" + value.retweet_count
-  fileHandle.write(msg)
+  try:
+    msg = message.value.get("user","").get("name", "") + "\t" + message.value.get("created_at","") + "\t" + message.value.get("text", "") + "\t" + message.value.get("retweet_count","")
+    fileHandle.write(msg)
+  except:
+    print("Unexpected error:", sys.exc_info()[0])
+    pass
+
 
 fileHandle.close()
