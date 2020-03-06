@@ -1,7 +1,4 @@
 # Kafka NodeJS application
-
-
-
 Install node
 ```
 cd ~
@@ -14,8 +11,11 @@ npm -v
 node -v
 ```
 
+Run 
 ```
 cd kafka/nodejs
+npm install
+
 node consumer.js
 node producer.js
 ```
