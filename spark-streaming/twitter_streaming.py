@@ -7,14 +7,11 @@ from tweepy import Stream
 from tweepy.streaming import StreamListener
 
 class TweetsListener(StreamListener):
-
     def __init__(self, socket):
-
         print ("Tweets listener initialized")
         self.client_socket = socket
 
     def on_data(self, data):
-
         try:
             jsonMessage = json.loads(data)
             message = jsonMessage["text"].encode("utf-8")
@@ -27,12 +24,10 @@ class TweetsListener(StreamListener):
         return True
 
     def on_error(self, status):
-
         print (status)
         return True
 
 def connect_to_twitter(connection, tracks):
-
     api_key = "aUJoQthk9sAXjfuKlYqbiQmF9"
     api_secret = "ZWNnFzU0nSEvJoLeuDBnc4Bykj7aILiYfUggjDvg1ijc9pjh4D"
 
@@ -46,9 +41,8 @@ def connect_to_twitter(connection, tracks):
     twitter_stream.filter(track=tracks, languages=["en"])
 
 if __name__ == "__main__":
-
     if len(sys.argv) < 4:
-        print("Usage: python m02_demo08_twitterStreaming.py <hostname> <port> <tracks>", 
+        print("Usage: python twitter_streaming.py <hostname> <port> <tracks>", 
                 file=sys.stderr)
         exit(-1)
 
