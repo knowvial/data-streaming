@@ -7,7 +7,7 @@ from afinn import Afinn
 if __name__ == "__main__":
 
     if len(sys.argv) != 4:
-        print("Usage: spark-submit --package kafka_twitter.py <kafka-server> <port> <topic>",
+        print("Usage: spark-submit --package org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.5 kafka_twitter.py <kafka-server> <port> <topic>",
               file=sys.stderr)
         exit(-1)
 
@@ -26,6 +26,8 @@ if __name__ == "__main__":
         .format("kafka")\
         .option("kafka.bootstrap.servers", host + ":" + port)\
         .option("subscribe", topic)\
+        .option("startingOffsets", "earliest") \
+        .option("endingOffsets", "latest") \
         .load()
 
     tweetsDF = tweetsDFRaw.selectExpr("CAST(value AS STRING) as tweet")
@@ -33,11 +35,10 @@ if __name__ == "__main__":
     afinn = Afinn()
 
     def add_sentiment_score(text):
-
         sentiment_score = afinn.score(text)
         return sentiment_score
 
-    add_sentiment_score_udf = udf(
+    add_sentiment_score_udf = udf (
         add_sentiment_score,
         FloatType()
     )
@@ -46,6 +47,7 @@ if __name__ == "__main__":
         "sentiment_score",
         add_sentiment_score_udf(tweetsDF.tweet)
     )
+
     query = tweetsDF.writeStream\
         .outputMode("append")\
         .format("console")\
