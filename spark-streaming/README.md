@@ -1,6 +1,6 @@
 # Some basic 
 
-## Word Count with structured streaming
+## 1. Word Count with structured streaming
 
 ```
 cd spark-streaming
@@ -17,5 +17,6 @@ nc -lk 9999
 
 In another terminal run the following comamnd
 ```
-python3 word_count_nc.py
+spark-submit word_count_nc.py localhost 9999
 ```
+You should notice the table updating.

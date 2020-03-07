@@ -6,7 +6,7 @@ from pyspark.sql.functions import split
 if __name__ == "__main__":
     
     if len(sys.argv) != 3:
-        print("Usage: spark-submit m01_demo01_netcat.py <hostname> <port>", file=sys.stderr)
+        print("Usage: spark-submit word_count_nc.py <hostname> <port>", file=sys.stderr)
         exit(-1)
 
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     # - from previous and current batch 
     # The call to format sets where the stream is written to
     query = wordCounts.writeStream\
-                      .outputMode('complete')\
+                      .outputMode('append')\
                       .format('console')\
                       .start()
 
