@@ -40,25 +40,25 @@ if __name__ == "__main__":
 
     # Create a trimmed version of the input dataframe with specific columns
     # We cannot sort a DataFrame unless aggregate is used, so no sorting here
-    trimmedDF = fileStreamDF.select(
-        fileStreamDF.first_name,
-        fileStreamDF.last_name,
-        fileStreamDF.city,
-        fileStreamDF.state
-    )
+    # trimmedDF = fileStreamDF.select(
+    #     fileStreamDF.product,
+    #     fileStreamDF.city,
+    #     fileStreamDF.state,
+    #     fileStreamDF.state
+    # )
 
     # We run in append mode, so only new rows are processed,
     # and existing rows in Result Table are not affected
     # The output is written to the console
     # We set truncate to false. If true, the output is truncated to 20 chars
     # Explicity state number of rows to display. Default is 20
-    # query = trimmedDF.writeStream\
-    #     .outputMode("append")\
-    #     .format("console")\
-    #     .option("truncate", "false")\
-    #     .option("numRows", 30)\
-    #     .start()\
-    #     .awaitTermination()
+    query = fileStreamDF.writeStream\
+        .outputMode("append")\
+        .format("console")\
+        .option("truncate", "false")\
+        .option("numRows", 30)\
+        .start()\
+        .awaitTermination()
 
 
 
