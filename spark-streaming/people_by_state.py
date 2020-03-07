@@ -73,7 +73,7 @@ if __name__ == "__main__":
     # 4: Aggregate mode
 
     frameByState = fileStreamDF.groupBy("state")\
-                                      .agg({"first_name": "count"})\
+                                      .agg(count("*").alias("cnt"))\
                                       .withColumnRenamed("sum(first_name)", "count")\
                                       .orderBy("count", ascending=False)
 
