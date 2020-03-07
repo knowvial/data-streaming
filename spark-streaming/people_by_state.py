@@ -38,14 +38,14 @@ if __name__ == "__main__":
     print("Schema of the input stream: ")
     print(fileStreamDF.printSchema)
 
-    # Create a trimmed version of the input dataframe with specific columns
-    # We cannot sort a DataFrame unless aggregate is used, so no sorting here
-    # trimmedDF = fileStreamDF.select(
-    #     fileStreamDF.product,
-    #     fileStreamDF.city,
-    #     fileStreamDF.state,
-    #     fileStreamDF.state
-    # )
+    Create a trimmed version of the input dataframe with specific columns
+    We cannot sort a DataFrame unless aggregate is used, so no sorting here
+    trimmedDF = fileStreamDF.select(
+        fileStreamDF.product,
+        fileStreamDF.city,
+        fileStreamDF.state,
+        fileStreamDF.state
+    )
 
     # We run in append mode, so only new rows are processed,
     # and existing rows in Result Table are not affected
@@ -71,16 +71,16 @@ if __name__ == "__main__":
 
     # 4: Aggregate mode
 
-    salesDf = fileStreamDF.groupBy("state")\
-                                      .agg({"sales": "sum"})\
-                                      .withColumnRenamed("sum(sales)", "tot_sales")\
-                                      .orderBy("tot_sales", ascending=False)
+    # salesDf = fileStreamDF.groupBy("state")\
+    #                                   .agg({"sales": "sum"})\
+    #                                   .withColumnRenamed("sum(sales)", "tot_sales")\
+    #                                   .orderBy("tot_sales", ascending=False)
 
-    # Write out our dataframe to the console
-    query = salesDf.writeStream\
-                      .outputMode("complete")\
-                      .format("console")\
-                      .option("truncate", "false")\
-                      .option("numRows", 30)\
-                      .start()\
-                      .awaitTermination()
+    # # Write out our dataframe to the console
+    # query = salesDf.writeStream\
+    #                   .outputMode("complete")\
+    #                   .format("console")\
+    #                   .option("truncate", "false")\
+    #                   .option("numRows", 30)\
+    #                   .start()\
+    #                   .awaitTermination()
