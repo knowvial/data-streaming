@@ -1,7 +1,7 @@
 
 # Kafka - Spark Streaming Example
 
-1. Start Kafka tweet producer to write to a topic
+1. Start Kafka tweet producer to write to a topic (https://github.com/rbotla/data-streaming/tree/master/kafka/producer-consumer/python)
 2. Run the following command for Spark streaming to get the tweets from Kafka and process the tweets in real-time
 
 Ensure to update an appropriate "2.11:2.4.5" version in the follownig command. Check ```ls $SPARK_HOME/jars``` to see the version associated with the kafka jars. Note there is a ":" in the before the Spark version.
