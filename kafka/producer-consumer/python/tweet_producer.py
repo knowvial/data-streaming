@@ -3,6 +3,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from kafka import SimpleProducer, KafkaClient
 import configparser
+import json
 
 config = configparser.ConfigParser()
 config.read(r'./config.cfg')
