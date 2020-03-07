@@ -16,6 +16,15 @@ kafka_topic = config.get('kafka', 'topic')
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
+        json_data = json.loads(data)
+        try:
+            tweet = json_data["text"]
+            print( tweet + "\n")
+            #self.producer.produce(bytes(json.dumps(tweet), "ascii"))
+            producer.send_messages(kafka_topic, bytes(json.dumps(tweet), "ascii"))
+            #producer.send_messages(kafka_topic, data.encode('utf-8'))
+        except:
+            pass
         producer.send_messages(kafka_topic, data.encode('utf-8'))
         print (data)
         return True
