@@ -58,13 +58,13 @@ if __name__ == "__main__":
     # The output is written to the console
     # We set truncate to false. If true, the output is truncated to 20 chars
     # Explicity state number of rows to display. Default is 20
-    query = trimmedDF.writeStream\
-        .outputMode("append")\
-        .format("console")\
-        .option("truncate", "false")\
-        .option("numRows", 30)\
-        .start()\
-        .awaitTermination()
+    # query = trimmedDF.writeStream\
+    #     .outputMode("append")\
+    #     .format("console")\
+    #     .option("truncate", "false")\
+    #     .option("numRows", 30)\
+    #     .start()\
+    #     .awaitTermination()
 
 
 
@@ -72,7 +72,16 @@ if __name__ == "__main__":
 
     # 4: Aggregate mode
 
-    # convictionsPerBorough = fileStreamDF.groupBy("borough")\
-    #                                   .agg({"value": "sum"})\
-    #                                   .withColumnRenamed("sum(value)", "convictions")\
-    #                                   .orderBy("convictions", ascending=False)
+    frameByState = fileStreamDF.groupBy("state")\
+                                      .agg({"first_name": "count"})\
+                                      .withColumnRenamed("sum(first_name)", "count")\
+                                      .orderBy("count", ascending=False)
+
+    query = frameByState.writeStream\
+                      .outputMode("complete")\
+                      .format("console")\
+                      .option("truncate", "false")\
+                      .option("numRows", 30)\
+                      .start()\
+                      .awaitTermination()
+
