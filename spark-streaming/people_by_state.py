@@ -13,24 +13,18 @@ if __name__ == "__main__":
     # InferSchema not yet available in spark structured streaming
     # (it is available in static dataframes)
     # We explicity state the schema of the input data
-    schema = StructType([StructField("first_name", StringType(), True),
-                         StructField("last_name", StringType(), True),
-                         StructField("company_name", StringType(), True),
-                         StructField("address", StringType(), True),
+    schema = StructType([StructField("product", StringType(), True),
                          StructField("city", StringType(), True),
                          StructField("state", StringType(), True),
-                         StructField("post", StringType(), True),
-                         StructField("phone1", StringType(), True),
-                         StructField("phone2", StringType(), True),
-                         StructField("email", StringType(), True),
-                         StructField("web", StringType(), True)
+                         StructField("country", StringType(), True),
+                         StructField("sales", StringType(), True)
                          ])
 
     # Read stream into a dataframe
     # Since the csv data includes a header row, we specify that here
     # We state the schema to use and the location of the csv files
     fileStreamDF = sparkSession.readStream\
-                               .option("header", "true")\
+                               .option("header", "false")\
                                .schema(schema)\
                                .csv("./datasets/droplocation")
 
@@ -72,15 +66,16 @@ if __name__ == "__main__":
 
     # 4: Aggregate mode
 
-    frameByState = fileStreamDF.groupBy("state")\
-                                      .agg(count("first_name").as("count"))\
-                                      .orderBy("count", ascending=False)
+    # groupByDF = fileStreamDF.groupBy("state")\
+    #                                   .agg({"first_name": "count"})\
+    #                                   .withColumnRenamed("sum(first_name)", "count")\
+    #                                   .orderBy("count", ascending=False)
 
-    query = frameByState.writeStream\
-                      .outputMode("complete")\
-                      .format("console")\
-                      .option("truncate", "false")\
-                      .option("numRows", 30)\
-                      .start()\
-                      .awaitTermination()
-
+    # # Write out our dataframe to the console
+    # query = groupByDF.writeStream\
+    #                   .outputMode("complete")\
+    #                   .format("console")\
+    #                   .option("truncate", "false")\
+    #                   .option("numRows", 30)\
+    #                   .start()\
+    #                   .awaitTermination()
