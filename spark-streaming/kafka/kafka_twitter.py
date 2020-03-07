@@ -7,8 +7,8 @@ from afinn import Afinn
 if __name__ == "__main__":
 
     if len(sys.argv) != 4:
-        print("Usage: spark-submit kafka_twitter.py <kafka-server> <port> <topic>", 
-                file=sys.stderr)
+        print("Usage: spark-submit --package kafka_twitter.py <kafka-server> <port> <topic>",
+              file=sys.stderr)
         exit(-1)
 
     host = sys.argv[1]
@@ -23,10 +23,10 @@ if __name__ == "__main__":
     spark.sparkContext.setLogLevel("ERROR")
 
     tweetsDFRaw = spark.readStream\
-                        .format("kafka")\
-                        .option("kafka.bootstrap.servers", host + ":" + port)\
-                        .option("subscribe", topic)\
-                        .load()
+        .format("kafka")\
+        .option("kafka.bootstrap.servers", host + ":" + port)\
+        .option("subscribe", topic)\
+        .load()
 
     tweetsDF = tweetsDFRaw.selectExpr("CAST(value AS STRING) as tweet")
 
@@ -38,18 +38,18 @@ if __name__ == "__main__":
         return sentiment_score
 
     add_sentiment_score_udf = udf(
-                                add_sentiment_score, 
-                                FloatType()
-                                )
+        add_sentiment_score,
+        FloatType()
+    )
 
     tweetsDF = tweetsDF.withColumn(
-                                    "sentiment_score", 
-                                    add_sentiment_score_udf(tweetsDF.tweet)
-                                    )
+        "sentiment_score",
+        add_sentiment_score_udf(tweetsDF.tweet)
+    )
     query = tweetsDF.writeStream\
-                                .outputMode("append")\
-                                .format("console")\
-                                .option("truncate", "false")\
-                                .trigger(processingTime="5 seconds")\
-                                .start()\
-                                .awaitTermination()
+        .outputMode("append")\
+        .format("console")\
+        .option("truncate", "false")\
+        .trigger(processingTime="5 seconds")\
+        .start()\
+        .awaitTermination()
