@@ -52,30 +52,35 @@ if __name__ == "__main__":
     # The output is written to the console
     # We set truncate to false. If true, the output is truncated to 20 chars
     # Explicity state number of rows to display. Default is 20
-    query = fileStreamDF.writeStream\
-        .outputMode("append")\
-        .format("console")\
-        .option("truncate", "false")\
-        .option("numRows", 30)\
-        .start()\
-        .awaitTermination()
-
-
+    # query = fileStreamDF.writeStream\
+    #     .outputMode("append")\
+    #     .format("console")\
+    #     .option("truncate", "false")\
+    #     .option("numRows", 30)\
+    #     .start()\
+    #     .awaitTermination()
 
     # 3: Complete mode
+    # query = fileStreamDF.writeStream\
+    #     .outputMode("complete")\
+    #     .format("console")\
+    #     .option("truncate", "false")\
+    #     .option("numRows", 30)\
+    #     .start()\
+    #     .awaitTermination()
 
     # 4: Aggregate mode
 
-    # groupByDF = fileStreamDF.groupBy("state")\
-    #                                   .agg({"first_name": "count"})\
-    #                                   .withColumnRenamed("sum(first_name)", "count")\
-    #                                   .orderBy("count", ascending=False)
+    groupByDF = fileStreamDF.groupBy("state")\
+                                      .agg({"first_name": "count"})\
+                                      .withColumnRenamed("sum(first_name)", "count")\
+                                      .orderBy("count", ascending=False)
 
-    # # Write out our dataframe to the console
-    # query = groupByDF.writeStream\
-    #                   .outputMode("complete")\
-    #                   .format("console")\
-    #                   .option("truncate", "false")\
-    #                   .option("numRows", 30)\
-    #                   .start()\
-    #                   .awaitTermination()
+    # Write out our dataframe to the console
+    query = groupByDF.writeStream\
+                      .outputMode("complete")\
+                      .format("console")\
+                      .option("truncate", "false")\
+                      .option("numRows", 30)\
+                      .start()\
+                      .awaitTermination()
