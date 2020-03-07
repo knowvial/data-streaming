@@ -27,7 +27,6 @@ if __name__ == "__main__":
         .option("kafka.bootstrap.servers", host + ":" + port)\
         .option("subscribe", topic)\
         .option("startingOffsets", "earliest") \
-        .option("endingOffsets", "latest") \
         .load()
 
     tweetsDF = tweetsDFRaw.selectExpr("CAST(value AS STRING) as tweet")
