@@ -71,10 +71,10 @@ if __name__ == "__main__":
 
     # 4: Aggregate mode
 
-    groupByDF = fileStreamDF.groupBy("state")\
-                                      .agg({"first_name": "count"})\
-                                      .withColumnRenamed("sum(first_name)", "count")\
-                                      .orderBy("count", ascending=False)
+    convictionsPerBorough = fileStreamDF.groupBy("state")\
+                                      .agg({"sales": "sum"})\
+                                      .withColumnRenamed("sum(sales)", "tot_sales")\
+                                      .orderBy("tot_sales", ascending=False)
 
     # Write out our dataframe to the console
     query = groupByDF.writeStream\
