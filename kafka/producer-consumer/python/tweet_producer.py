@@ -25,8 +25,6 @@ class StdOutListener(StreamListener):
             #producer.send_messages(kafka_topic, data.encode('utf-8'))
         except:
             pass
-        producer.send_messages(kafka_topic, data.encode('utf-8'))
-        print (data)
         return True
     def on_error(self, status):
         print (status)
