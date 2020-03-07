@@ -28,11 +28,11 @@ class TweetsListener(StreamListener):
         return True
 
 def connect_to_twitter(connection, tracks):
-    api_key = "aUJoQthk9sAXjfuKlYqbiQmF9"
-    api_secret = "ZWNnFzU0nSEvJoLeuDBnc4Bykj7aILiYfUggjDvg1ijc9pjh4D"
+    api_key = "fill"
+    api_secret = "fill"
 
-    access_token = "1235683165731049472-OAWZly9ODyfkAzbqfZKxlbKVHzBS7w"
-    access_token_secret = "jyDPn85Xp1OwU2r5Fb4R3QilNBSKeyyI4wAmwmSLD7OTL"
+    access_token = "fill-OAWZly9ODyfkAzbqfZKxlbKVHzBS7w"
+    access_token_secret = "fill"
 
     auth = OAuthHandler(api_key, api_secret)
     auth.set_access_token(access_token, access_token_secret)

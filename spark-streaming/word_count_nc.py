@@ -51,7 +51,7 @@ if __name__ == "__main__":
     # - from previous and current batch 
     # The call to format sets where the stream is written to
     query = wordCounts.writeStream\
-                      .outputMode('append')\
+                      .outputMode('update')\
                       .format('console')\
                       .start()
 
