@@ -71,13 +71,13 @@ if __name__ == "__main__":
 
     # 4: Aggregate mode
 
-    convictionsPerBorough = fileStreamDF.groupBy("state")\
+    salesDf = fileStreamDF.groupBy("state")\
                                       .agg({"sales": "sum"})\
                                       .withColumnRenamed("sum(sales)", "tot_sales")\
                                       .orderBy("tot_sales", ascending=False)
 
     # Write out our dataframe to the console
-    query = groupByDF.writeStream\
+    query = salesDf.writeStream\
                       .outputMode("complete")\
                       .format("console")\
                       .option("truncate", "false")\
