@@ -1,6 +1,27 @@
 # Handling streaming data with Kafka and Spark Streaming
 This repo provides some sample resources to introduce Kafka and Spark Streaming for beginners.
 
+## Lab #1 (Kafka)
+1. Install Kafka on Linux or on Windows - 
+2. Learn some basic Kafka CLI commands - 
+
+## Lab #2 (Kafka)
+* Write your first Kafka Producer / Consumer to get tweets from Twitter and write to a file - Instructions on page <This-repo>/kafka/producer-consumer/python
+
+## Lab #3 (Kafka)
+* Write your first Kafka Connect to get tweets and produce to a Kafka topic - Instructions on page <This-repo>/kafka/producer-consumer/python
+
+## Lab #4 (Spark Streaming)
+* Wordcount on a stream of lines entered on a Netcat socket - 
+
+## Lab #5 (Spark Streaming)
+* Snapshot view of data from file streaming
+* Aggregates on file streaming over a timed interval
+
+## Lab #6 (Kafka + Spark Streaming)
+* Twitter sentiment analaysis for tweets ingested through Kafka
+
+## Optional
 The instructions for running the sample code are written for Google Cloud Platform.
 
 * Create a Free Tier GCP account - follow instructions at https://cloud.google.com/free

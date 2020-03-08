@@ -4,7 +4,7 @@ from pyspark.sql import SparkSession
 
 if __name__ == "__main__":
     sparkSession = SparkSession.builder.master("local")\
-        .appName("SparkStreamingAppendMode")\
+        .appName("SparkStreamingSalesData")\
         .getOrCreate()
 
     # ERROR log level will generate fewer lines of output compared to INFO and DEBUG
