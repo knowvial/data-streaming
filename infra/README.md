@@ -1,3 +1,16 @@
+* Create a Free Tier GCP account - follow instructions at https://cloud.google.com/free
+* Create a VM
+* Install gcloud - https://cloud.google.com/sdk/install
+
+```
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+```
+
+```
+sudo apt update
+sudo apt install git
+```
+
 ```shell
 gcloud compute instances create data-streaming \
     --image-family debian-9 \
