@@ -38,8 +38,8 @@ if __name__ == "__main__":
     print("Schema of the input stream: ")
     print(fileStreamDF.printSchema)
 
-    Create a trimmed version of the input dataframe with specific columns
-    We cannot sort a DataFrame unless aggregate is used, so no sorting here
+    # Create a trimmed version of the input dataframe with specific columns
+    # We cannot sort a DataFrame unless aggregate is used, so no sorting here
     trimmedDF = fileStreamDF.select(
         fileStreamDF.product,
         fileStreamDF.city,
