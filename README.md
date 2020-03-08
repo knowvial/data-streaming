@@ -12,11 +12,10 @@ This repo provides some sample resources to introduce Kafka and Spark Streaming 
 * Write Kafka Connect program to get tweets and send to a Kafka topic - [Windows instructions](https://github.com/rbotla/data-streaming/tree/master/kafka/connect#instructions-on-windows) Instructions on page [Linkux / Mac instructions](https://github.com/rbotla/data-streaming/tree/master/kafka/connect#instructions-on-linux---debian-9).
 
 ## Lab #4 (Spark Streaming)
-* Wordcount on a stream of lines entered on a Netcat socket - 
+* Wordcount on a stream of lines entered on a Netcat socket - [instructions and code](https://github.com/rbotla/data-streaming/tree/master/spark-streaming#word-count-with-structured-streaming)
 
 ## Lab #5 (Spark Streaming)
-* Snapshot view of data from file streaming
-* Aggregates on file streaming over a timed interval
+* Aggregates on file streaming over a timed interval - [instructions and code](https://github.com/rbotla/data-streaming/tree/master/spark-streaming#sales-by-state-aggregation)
 
 ## Lab #6 (Kafka + Spark Streaming)
-* Twitter sentiment analaysis for tweets ingested through Kafka
+* Twitter sentiment analaysis for tweets ingested through Kafka [instructions and code] (https://github.com/rbotla/data-streaming/tree/master/spark-streaming/kafka)
