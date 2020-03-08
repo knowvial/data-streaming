@@ -1,6 +1,12 @@
 # Kafka Connect
 ![Kafka Connect Data Flow](kafka-connect.png)
 
+<!--ts-->
+* [Linux - Debian 9](#instructions-on-linux---debian-9)
+* [Windows](#instructions-on-windows)
+<!--te-->
+
+## Instructions on Linux - Debian 9
 Download jar files from https://github.com/jcustenborder/kafka-connect-twitter/releases.
 
 ```
@@ -34,21 +40,35 @@ connect-standalone.sh connect-standalone.properties twitter.properties
 ```
 
 
+## Instructions on Windows
+Download jar files from https://github.com/jcustenborder/kafka-connect-twitter/releases.
 
----
-
-Confluent maintains the connnectors to various source and sinks. You can view the complete list of sources and sinks at https://www.confluent.io/hub/.
-To use one of the connector, install Confluent Hub Client using the following comamnds.
 ```
-cd ~
-curl -sL http://client.hub.confluent.io/confluent-hub-client-latest.tar.gz -o confluent-hub.gz
+cd [REPO_HOME]\kafka\connect
 
-mkdir -p confluent-hub && tar -zxf confluent-hub.gz -C confluent-hub
-echo "export PATH=${PWD}/confluent-hub/bin:\$PATH" >>~/.bashrc
-source ~/.bashrc
+Download https://github.com/jcustenborder/kafka-connect-twitter/releases/download/0.2.26/kafka-connect-twitter-0.2.26.tar.gz
+
+Run the following command to untar the file
+tar -zxf kafka-connect-twitter.tar.gz
+```
+You should see a "usr" folder created after you untar. Confirm all the required jar files are located at usr\share\kafka-connect\kafka-connect-twitter location.
+
+Edit connect-standalone.properties file to ensure "plugins.path" parameter is pointing to usr\share\kafka-connect (or equivalent on your machine). Note: don't include "kafka-connect-twitter" in the path.
+
+Enter Twitter developer credentials in twitter.properties file and update your search terms.
+
+Create two topics that the Twitter Connector expects you to create.
+```
+bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --create --topic twitter_status_connect --partitions 3 --replication-factor 1
+bin\windows\kafka-topics.bat --zookeeper 127.0.0.1:2181 --create --topic twitter_delete_connect --partitions 3 --replication-factor 1
 ```
 
-Install Twiter connector using Confluent Hub Client
+Start CLI consumer to view all tweets that connector will write to a Kafka topic.
 ```
-confluent-hub install jcustenborder/kafka-connect-twitter:0.3.33
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic twitter_status_connect --group app2
+```
+
+Run Connect and check if you can see the twitter results in the consumer CLI window.
+```
+bin\windows\connect-standalone.bat connect-standalone.properties twitter.properties
 ```
