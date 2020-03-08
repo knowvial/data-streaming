@@ -37,7 +37,7 @@ Update your Twitter developer app credentials in config.cfg file. Refer to https
 
 Run the twitter kafka producer program. CTRL + C to stop streaming after few seconds.
 ```
-python3 twitter_producer.py
+python3 tweet_producer.py
 ```
 
 Check how many tweets are in the topic by partition
@@ -85,7 +85,7 @@ Update your Twitter developer app credentials in config.cfg file. Refer to https
 
 Run the twitter kafka producer program. CTRL + C to stop streaming after few seconds.
 ```
-python3 twitter_producer.py
+python3 tweet_producer.py
 ```
 
 Check how many tweets are in the topic by partition
