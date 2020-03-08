@@ -6,7 +6,7 @@ This repo provides some sample resources to introduce Kafka and Spark Streaming 
 2. Learn some basic Kafka CLI commands - https://tinyurl.com/uastytv (Linux / Mac) or https://tinyurl.com/tago627 (Windows)
 
 ## Lab #2 (Kafka)
-* Write your first Kafka Producer / Consumer to get tweets from Twitter and write to a file - Instructions on page <This-repo>/kafka/producer-consumer/python
+* Write your first Kafka Producer / Consumer to get tweets from Twitter and write to a file - Instructions on page https://github.com/rbotla/data-streaming/tree/master/kafka/producer-consumer.
 
 ## Lab #3 (Kafka)
 * Write your first Kafka Connect to get tweets and produce to a Kafka topic - Instructions on page <This-repo>/kafka/producer-consumer/python
