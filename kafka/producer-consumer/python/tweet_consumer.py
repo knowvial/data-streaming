@@ -18,8 +18,7 @@ consumer.subscribe([kafka_topic])
 for message in consumer :
   try:
     #msg = message.value.get("user","").get("name", "") + "\t" + message.value.get("created_at","") + "\t" + message.value.get("text", "") + "\t" + message.value.get("retweet_count","")
-    #fileHandle.write(">>>> " + message.value.get("text", "---no tweet") + "\n")
-    fileHandle.write(message + "\n")
+    fileHandle.write(message.value + "\n")
   except:
     print("Unexpected error:", sys.exc_info()[0])
     pass
