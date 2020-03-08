@@ -2,8 +2,10 @@
 
 ![Kafka Twitter](kafka-consumer-twitter.png)
 
-[Linux - Debian 9](#instructions-on-linux---debian-9)
-[Windows](#instructions-on-windows)
+<!--ts-->
+* [Linux - Debian 9](#instructions-on-linux---debian-9)
+* [Windows](#instructions-on-windows)
+<!--te-->
 
 ## Instructions on Linux - Debian 9 
 ```
