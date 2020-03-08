@@ -2,8 +2,8 @@
 This repo provides some sample resources to introduce Kafka and Spark Streaming for beginners.
 
 ## Lab #1 (Kafka)
-1. Install Kafka on Linux or on Windows - 
-2. Learn some basic Kafka CLI commands - 
+1. Install Kafka on Linux or on Windows - https://tinyurl.com/s98fbtq
+2. Learn some basic Kafka CLI commands - https://tinyurl.com/uastytv (Linux / Mac) or https://tinyurl.com/tago627 (Windows)
 
 ## Lab #2 (Kafka)
 * Write your first Kafka Producer / Consumer to get tweets from Twitter and write to a file - Instructions on page <This-repo>/kafka/producer-consumer/python
