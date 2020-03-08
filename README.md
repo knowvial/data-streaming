@@ -18,4 +18,4 @@ This repo provides some sample resources to introduce Kafka and Spark Streaming 
 * Aggregates on file streaming over a timed interval - [instructions and code](https://github.com/rbotla/data-streaming/tree/master/spark-streaming#sales-by-state-aggregation)
 
 ## Lab #6 (Kafka + Spark Streaming)
-* Twitter sentiment analaysis for tweets ingested through Kafka [instructions and code] (https://github.com/rbotla/data-streaming/tree/master/spark-streaming/kafka)
+* Twitter sentiment analaysis for tweets ingested through Kafka [instructions and code](https://github.com/rbotla/data-streaming/tree/master/spark-streaming/kafka)
