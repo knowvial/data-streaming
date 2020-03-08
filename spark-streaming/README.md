@@ -1,6 +1,6 @@
 # Some basic
 * [Streaming word count thorugh socket listner](#word-count-with-structured-streaming)
-* [Streaming aggregation thorugh file listner](#word-count-with-structured-streaming)
+* [Streaming aggregation thorugh file listner](#sales-by-state-aggregation)
 
 ## Word Count with structured streaming
 In this exercise, Spark streaming will listen for a stream of words entered in a terminal.
