@@ -46,6 +46,7 @@ if __name__ == "__main__":
          return timestamp
 
     add_timestamp_udf = udf(add_timestamp, StringType())
+    numsTs = nums.withColumn("timestamp", add_timestamp_udf())
 
     if option == 'stateless':
       query = nums.filter(nums.num > 65)\
@@ -57,7 +58,6 @@ if __name__ == "__main__":
     elif option == 'rolling':
       print('rolling')
     elif option == 'tumble':
-        numsTs = nums.withColumn("timestamp", add_timestamp_udf())
 
         # window(timeColumn, windowDuration, slideDuration=None, startTime=None)
         # timeColumn gives the time field to use when creating a window
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         # slideDuration must be <= windowDuration
         # The #convictions for a particular window will likely increase with each batch of files processed - 
         # this is because more timestamps within that window will be encountered in the new batch
-        windowedCounts = numTS.groupBy(
+        windowedCounts = numsTS.groupBy(
                                             window(numsTs.timestamp, 
                                                     "30 seconds"))\
                                           .agg({"num": "sum"})\
@@ -82,9 +82,6 @@ if __name__ == "__main__":
                               .awaitTermination()
 
     elif option == 'sliding':
-
-      numsTs = nums.withColumn("timestamp", add_timestamp_udf())
-
       windowedCount = numsTs.groupBy(window(numsTs.timestamp, "60 seconds", "30 seconds"))\
         .agg({"num": "sum"})\
         .withColumnRenamed("sum(num)", "TotalVehicles")\
