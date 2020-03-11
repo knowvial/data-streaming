@@ -39,7 +39,7 @@ if __name__ == "__main__":
             split(lines.value, ' ')
         ).alias('num')
     )
-    nums = nums.selectExpr("cast(num as int) num")
+    #nums = nums.selectExpr("cast(num as int) num")
 
     def add_timestamp():
       ts = time.time()
