@@ -37,6 +37,7 @@ if __name__ == "__main__":
 
     query = wordCounts.writeStream\
                       .outputMode('complete')\
+                      .trigger(processingTime="10 seconds")\
                       .format('console')\
                       .start()
 

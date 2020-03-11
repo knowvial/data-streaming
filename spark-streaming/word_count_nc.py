@@ -12,7 +12,8 @@ if __name__ == "__main__":
 
     host = sys.argv[1]
     port = int(sys.argv[2])
-    
+    option = int(sys.argv[3])
+
     spark = SparkSession\
         .builder\
         .appName("NetcatWordCount")\
@@ -46,14 +47,18 @@ if __name__ == "__main__":
                       .count()
 
 
-    # Start running the query that prints the running counts to the console
-    # Running in "complete" mode ensures that any operation uses ALL data 
-    # - from previous and current batch 
-    # The call to format sets where the stream is written to
-    query = wordCounts.writeStream\
-                      .outputMode('complete')\
-                      .format('console')\
-                      .start()
+    if option == 'complete':
+        query = wordCounts.writeStream\
+                        .outputMode('complete')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
+    elif option == 'append':
+        query = wordCounts.writeStream\
+                        .outputMode('append')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
 
     query.awaitTermination()
 
