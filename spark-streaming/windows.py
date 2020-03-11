@@ -40,14 +40,12 @@ if __name__ == "__main__":
         ).alias('num')
     )
     #nums = nums.selectExpr("cast(num as int) num")
-
     def add_timestamp():
-      ts = time.time()
-      timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H-%M-%S')
-      return timestamp
+         ts = time.time()
+         timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+         return timestamp
 
     add_timestamp_udf = udf(add_timestamp, StringType())
-    numsTs = nums.withColumn("timestamp", add_timestamp_udf())
 
     if option == 'stateless':
       query = nums.filter(nums.num > 65)\
@@ -59,20 +57,35 @@ if __name__ == "__main__":
     elif option == 'rolling':
       print('rolling')
     elif option == 'tumble':
-      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "10 seconds", "5 seconds"))\
-                          .agg({"num": "sum"})\
-                          .withColumnRenamed("sum(num)", "TotalVehicles")\
-                          .orderBy('TotalVehicles', ascending=False)
-      
-      query = windowedCount.writeStream\
-                  .outputMode("complete")\
-                  .format("console")\
-                  .option("truncate", "false")\
-                  .start()\
-                  .awaitTermination()
+        numsTs = nums.withColumn("timestamp", add_timestamp_udf())
+
+        # window(timeColumn, windowDuration, slideDuration=None, startTime=None)
+        # timeColumn gives the time field to use when creating a window
+        # windowDuration gives the length of the window
+        # slideDuration is the gap between each window (Windows can overlap)
+        # slideDuration must be <= windowDuration
+        # The #convictions for a particular window will likely increase with each batch of files processed - 
+        # this is because more timestamps within that window will be encountered in the new batch
+        windowedCounts = numTS.groupBy(
+                                            window(numsTs.timestamp, 
+                                                    "30 seconds"))\
+                                          .agg({"num": "sum"})\
+                                          .withColumnRenamed("sum(num)", "TotalVehicles")\
+                                          .orderBy('TotalVehicles', ascending=False)
+
+        # Write output to the console
+        query = windowedCounts.writeStream\
+                              .outputMode("complete")\
+                              .format("console")\
+                              .option("truncate","false")\
+                              .start()\
+                              .awaitTermination()
 
     elif option == 'sliding':
-      numsTs.groupBy(window(numsTs.timestamp, "60 seconds", "30 seconds"))\
+
+      numsTs = nums.withColumn("timestamp", add_timestamp_udf())
+
+      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "60 seconds", "30 seconds"))\
         .agg({"num": "sum"})\
         .withColumnRenamed("sum(num)", "TotalVehicles")\
         .orderBy('TotalVehicles', ascending=False)
