@@ -6,11 +6,12 @@ from pyspark.sql.functions import split
 if __name__ == "__main__":
     
     if len(sys.argv) != 4:
-        print("Usage: spark-submit word_count_nc.py <hostname> <port>", file=sys.stderr)
+        print("Usage: spark-submit output_modes.py <hostname> <port> <option>", file=sys.stderr)
         exit(-1)
 
     host = sys.argv[1]
     port = int(sys.argv[2])
+    option = sys.argv[3]
 
     spark = SparkSession\
         .builder\
@@ -43,16 +44,23 @@ if __name__ == "__main__":
     wordCounts = words.groupBy('word')\
                       .count()
 
-    query = wordCounts.writeStream\
-                    .outputMode('complete')\
-                    .trigger(processingTime="10 seconds")\
-                    .format('console')\
-                    .start()
+    if option == 'complete':
+        query = wordCounts.writeStream\
+                        .outputMode('complete')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
+    elif option == 'update':
+        query = wordCounts.writeStream\
+                        .outputMode('update')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
+    elif option == 'append':
+        query = words.writeStream\
+                        .outputMode('append')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
 
     query.awaitTermination()
-
-
-
-
-
-
