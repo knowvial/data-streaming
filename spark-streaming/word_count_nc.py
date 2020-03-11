@@ -40,11 +40,9 @@ if __name__ == "__main__":
         ).alias('word')
     )
 
-
     # Generate running word count
     wordCounts = words.groupBy('word')\
                       .count()
-
 
     if option == 'complete':
         query = wordCounts.writeStream\
@@ -55,6 +53,12 @@ if __name__ == "__main__":
     elif option == 'update':
         query = wordCounts.writeStream\
                         .outputMode('update')\
+                        .trigger(processingTime="10 seconds")\
+                        .format('console')\
+                        .start()
+    elif option == 'append':
+        query = words.writeStream\
+                        .outputMode('append')\
                         .trigger(processingTime="10 seconds")\
                         .format('console')\
                         .start()
