@@ -9,10 +9,9 @@ if __name__ == "__main__":
         print("Usage: spark-submit word_count_nc.py <hostname> <port>", file=sys.stderr)
         exit(-1)
 
-
     host = sys.argv[1]
     port = int(sys.argv[2])
-    option = int(sys.argv[3])
+    option = sys.argv[3]
 
     spark = SparkSession\
         .builder\
