@@ -81,7 +81,7 @@ if __name__ == "__main__":
                               .awaitTermination()
 
     elif option == 'sliding':
-      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "60 seconds", "30 seconds"))\
+      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "10 seconds", "5 seconds"))\
         .agg({"num": "sum"})\
         .withColumnRenamed("sum(num)", "TotalVehicles")\
         .orderBy('TotalVehicles', ascending=False)
