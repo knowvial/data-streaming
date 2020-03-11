@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # The #convictions for a particular window will likely increase with each batch of files processed - 
         # this is because more timestamps within that window will be encountered in the new batch
         windowedCounts = numsTs.groupBy(
-                          window(numsTs.timestamp, "60 seconds"))\
+                          window(numsTs.timestamp, "10 seconds"))\
                         .agg({"num": "sum"})\
                         .withColumnRenamed("sum(num)", "TotalVehicles")\
                         .orderBy('TotalVehicles', ascending=False)
