@@ -52,9 +52,9 @@ if __name__ == "__main__":
                         .trigger(processingTime="10 seconds")\
                         .format('console')\
                         .start()
-    elif option == 'append':
+    elif option == 'update':
         query = wordCounts.writeStream\
-                        .outputMode('append')\
+                        .outputMode('update')\
                         .trigger(processingTime="10 seconds")\
                         .format('console')\
                         .start()
