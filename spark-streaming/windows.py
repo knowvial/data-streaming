@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     def add_timestamp():
       ts = time.time()
-      timestamp = datatime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H-%M-%S')
+      timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H-%M-%S')
       return timestamp
 
     add_timestamp_udf = udf(add_timestamp, StringType())
