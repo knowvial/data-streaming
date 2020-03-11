@@ -1,7 +1,7 @@
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
-from kafka import SimpleProducer, KafkaClient
+from kafka import KafkaProducer
 import configparser
 import json
 
@@ -30,8 +30,10 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print (status)
 
-kafka = KafkaClient(hosts= kafka_server)
-producer = SimpleProducer(kafka)
+# kafka = KafkaClient(hosts= kafka_server)
+# producer = SimpleProducer(kafka)
+producer = KafkaProducer(bootstrap_servers=[kafka_server], value_serializer=lambda x: dumps(x).encode('utf-8'))
+
 l = StdOutListener()
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
