@@ -59,7 +59,7 @@ if __name__ == "__main__":
     elif option == 'rolling':
       print('rolling')
     elif option == 'tumble':
-      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "60 seconds", "60 seconds"))\
+      windowedCount = numsTs.groupBy(window(numsTs.timestamp, "10 seconds", "5 seconds"))\
                           .agg({"num": "sum"})\
                           .withColumnRenamed("sum(num)", "TotalVehicles")\
                           .orderBy('TotalVehicles', ascending=False)
