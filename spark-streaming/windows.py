@@ -39,7 +39,7 @@ if __name__ == "__main__":
     if option == 'stateless':
         query = nums.filter(nums.num > 65)\
                   .writeStream\
-                  .outputMode('complete')\
+                  .outputMode('append')\
                   .trigger(processingTime="10 seconds")\
                   .format('console')\
                   .start()
