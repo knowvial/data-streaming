@@ -47,30 +47,6 @@ if __name__ == "__main__":
         fileStreamDF.country
     )
 
-    # We run in append mode, so only new rows are processed,
-    # and existing rows in Result Table are not affected
-    # The output is written to the console
-    # We set truncate to false. If true, the output is truncated to 20 chars
-    # Explicity state number of rows to display. Default is 20
-    # query = fileStreamDF.writeStream\
-    #     .outputMode("append")\
-    #     .format("console")\
-    #     .option("truncate", "false")\
-    #     .option("numRows", 30)\
-    #     .start()\
-    #     .awaitTermination()
-
-    # 3: Complete mode
-    # query = fileStreamDF.writeStream\
-    #     .outputMode("complete")\
-    #     .format("console")\
-    #     .option("truncate", "false")\
-    #     .option("numRows", 30)\
-    #     .start()\
-    #     .awaitTermination()
-
-    # 4: Aggregate mode
-
     salesDf = fileStreamDF.groupBy("state")\
                         .agg({"sales": "sum"})\
                         .withColumnRenamed("sum(sales)", "tot_sales")\
