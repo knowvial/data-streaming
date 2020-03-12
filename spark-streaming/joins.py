@@ -35,18 +35,18 @@ if __name__ == "__main__":
                     .schema(headsSchema)\
                     .load("./datasets/heads.csv")
 
+    joinDF = headsDF.join( categoryDF, ["city", "state", "country"] )
 
     # Registering Table
     # Create a view which can later be queried like a table
-    fileStreamDF.createOrReplaceTempView("SalesData")
+    joinDF.createOrReplaceTempView("SalesData")
 
-    categoryDF = sparkSession.sql("SELECT city, sales \
+    categoryDF = sparkSession.sql("SELECT city, regional_head, sales \
                                     FROM SalesData \
                                     WHERE state = 'California'")
 
-    joinDF = headsDF.join( categoryDF, ["city", "state", "country"] )
 
-    sales = joinDF.groupBy("regional_head")\
+    sales = categoryDF.groupBy("regional_head")\
                   .agg({"sales": "sum"})\
                   .withColumnRenamed("sum(sales)", "tot_sales")\
                   .orderBy("tot_sales", ascending=False)
