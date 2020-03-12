@@ -56,7 +56,15 @@ if __name__ == "__main__":
                 .format('console')\
                 .start()
     elif option == 'rolling':
-      print('rolling')
+        windowedCounts = numsTs.agg({"num": "sum"})\
+                        .withColumnRenamed("sum(num)", "TotalVehicles")
+
+        query = windowedCounts.writeStream\
+                              .outputMode("complete")\
+                              .format("console")\
+                              .option("truncate","false")\
+                              .start()\
+                              .awaitTermination()
     elif option == 'tumble':
 
         # window(timeColumn, windowDuration, slideDuration=None, startTime=None)
