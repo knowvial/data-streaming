@@ -35,7 +35,7 @@ if __name__ == "__main__":
                     .schema(headsSchema)\
                     .load("./datasets/heads.csv")
 
-    joinDF = headsDF.join( categoryDF, ["city", "state", "country"] )
+    joinDF = headsDF.join( headsDF, ["city", "state", "country"] )
 
     # Registering Table
     # Create a view which can later be queried like a table
