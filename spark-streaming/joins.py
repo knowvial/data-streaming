@@ -46,7 +46,7 @@ if __name__ == "__main__":
                                     WHERE state = 'California'")
 
 
-    sales = categoryDF.groupBy("regional_head")\
+    sales = categoryDF.groupBy("salesdata.regional_head")\
                   .agg({"sales": "sum"})\
                   .withColumnRenamed("sum(sales)", "tot_sales")\
                   .orderBy("tot_sales", ascending=False)
