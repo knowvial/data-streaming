@@ -20,7 +20,7 @@ if __name__ == "__main__":
                                .option("header", "false")\
                                .option("maxFilesPerTrigger", 2)\
                                .schema(schema)\
-                               .csv("../datasets/droplocation")
+                               .csv("./datasets/droplocation")
 
     # Registering Table
     # Create a view which can later be queried like a table
