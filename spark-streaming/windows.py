@@ -70,7 +70,7 @@ if __name__ == "__main__":
                           window(numsTs.timestamp, "10 seconds"))\
                         .agg({"num": "sum"})\
                         .withColumnRenamed("sum(num)", "TotalVehicles")\
-                        #.orderBy('TotalVehicles', ascending=False)
+                        .orderBy('window', ascending=False)
 
         # Write output to the console
         query = windowedCounts.writeStream\
@@ -84,7 +84,7 @@ if __name__ == "__main__":
       windowedCount = numsTs.groupBy(window(numsTs.timestamp, "10 seconds", "5 seconds"))\
         .agg({"num": "sum"})\
         .withColumnRenamed("sum(num)", "TotalVehicles")\
-        #.orderBy('TotalVehicles', ascending=False)
+        .orderBy('window', ascending=False)
 
       query = windowedCount.writeStream\
                   .outputMode("complete")\
