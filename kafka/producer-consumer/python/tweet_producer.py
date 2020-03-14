@@ -21,19 +21,14 @@ class StdOutListener(StreamListener):
         json_data = json.loads(data)
         try:
             tweet = json_data["text"]
-            # print( tweet + "\n")
-            #self.producer.produce(bytes(json.dumps(tweet), "ascii"))
+            print( tweet + "\n")
             producer.send(kafka_topic, value=tweet.encode('utf-8'))
-            #producer.send_messages(kafka_topic, data.encode('utf-8'))
         except:
-            print ("Unexpected error:", sys.exc_info()[0])
             pass
         return True
     def on_error(self, status):
         print (status)
 
-# kafka = KafkaClient(hosts= kafka_server)
-# producer = SimpleProducer(kafka)
 producer = KafkaProducer(bootstrap_servers=[kafka_server])
 
 l = StdOutListener()
