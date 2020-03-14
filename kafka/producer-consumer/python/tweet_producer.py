@@ -3,6 +3,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from kafka import KafkaProducer
 import configparser
+import sys
 import json
 
 config = configparser.ConfigParser()
@@ -22,9 +23,10 @@ class StdOutListener(StreamListener):
             tweet = json_data["text"]
             print( tweet + "\n")
             #self.producer.produce(bytes(json.dumps(tweet), "ascii"))
-            producer.send_messages(kafka_topic, bytes(json.dumps(tweet), "ascii"))
+            producer.send(kafka_topic, value=bytes(tweet, "ascii"))
             #producer.send_messages(kafka_topic, data.encode('utf-8'))
         except:
+            print ("Unexpected error:", sys.exc_info()[0])
             pass
         return True
     def on_error(self, status):
