@@ -21,7 +21,7 @@ class StdOutListener(StreamListener):
         json_data = json.loads(data)
         try:
             tweet = json_data["text"]
-            print( tweet + "\n")
+            # print( tweet + "\n")
             #self.producer.produce(bytes(json.dumps(tweet), "ascii"))
             producer.send(kafka_topic, value=bytes(tweet, "ascii"))
             #producer.send_messages(kafka_topic, data.encode('utf-8'))
