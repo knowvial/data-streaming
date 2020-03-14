@@ -23,7 +23,7 @@ class StdOutListener(StreamListener):
             tweet = json_data["text"]
             # print( tweet + "\n")
             #self.producer.produce(bytes(json.dumps(tweet), "ascii"))
-            producer.send(kafka_topic, value=bytes(tweet, "ascii"))
+            producer.send(kafka_topic, value=bytes(tweet.decode('utf-8'), "ascii"))
             #producer.send_messages(kafka_topic, data.encode('utf-8'))
         except:
             print ("Unexpected error:", sys.exc_info()[0])
