@@ -13,7 +13,7 @@ tweet_download_file = config.get('consumer_file', 'file_name')
 
 fileHandle = open(tweet_download_file, "a+")
 
-consumer = KafkaConsumer(bootstrap_servers=kafka_server, group_id='app1', auto_offset_reset='earliest')
+consumer = KafkaConsumer(bootstrap_servers=kafka_server, group_id='app1', auto_offset_reset='latest')
 consumer.subscribe([kafka_topic])
 for message in consumer:
   try:
